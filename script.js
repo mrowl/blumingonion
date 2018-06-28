@@ -1,20 +1,36 @@
-var ball = document.querySelector('ball');
-var h = 575; // x vertex, half of total bounce duration
-var k = 160; // y vertex, total bounce height
-var a = -4 * k / Math.pow(h * 2, 2); // coefficient: -.000483932
-var ypos, start, time;
+function getSize() {
+	var w = window,
+				d = document,
+				e = d.documentElement,
+				g = d.getElementsByTagName('body')[0],
+				x = w.innerWidth || e.clientWidth || g.clientWidth,
+				y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+	return [x, y];
+}
 
-(function drawPosition(timestamp) {
-      if (!start) { start = timestamp };
-      time = timestamp - start;
+var tween;
 
-      // Position as a function of time, using the vertex form
-      // of the quadratic formula:  f(x) = a(x - h)^2 + k,
-      // (where [h, k] is the vertex). See it graphically at:
-      //    https://www.desmos.com/calculator/i6yunccp7v
-      ypos = a * Math.pow(((time + h) % (h * 2) - h), 2) + k;
+window.onload = function start() {
+	window.setInterval(function () {
+		if (!tween || !tween.isActive()) {
+			tween = TweenMax.to("qr", 0.575, {
+				x: function() {
+					return Math.random() * getSize()[0];
+				},
+				y: function() {
+					return Math.random() * getSize()[1];
+				},
+				//yoyo: true,
+				ease: Power1.easeIn,
+				//repeat: -1,
+				//onComplete: function() { $(this).; }
+			})
+		}
+	}, 50);
+}
+function qrs() {
 
-      ball.style.transform = 'translateY(' + -ypos + 'px)';
-      window.requestAnimationFrame(drawPosition);
-})(performance.now());
-
+}
+//var tl = new TimelineMax();
+//tl.add(
+//);
