@@ -21,34 +21,42 @@ for (i = 0; i < NumImgs; ++i) {
 }
 
 var bodyEl = document.querySelector('body');
-console.log(bodyEl);
+var howler = new Howl({
+  src: 'bins/airhorn.mp3'
+});
+
 window.onload = function start() {
   for (i = 0; i < imgs.length; ++i) {
     var img = imgs[i];
-    console.log(img);
     bodyEl.appendChild(img);
   }
 
 	window.setInterval(function () {
 		if (!tween || !tween.isActive()) {
-			tween = TweenMax.to(".qr", 2, {
+			tween = TweenMax.to(".qr", 3, {
 				x: function() {
-					return Math.random() * (getSize()[0] - 400);
+					return Math.random() * (getSize()[0] - 600);
 				},
 				y: function() {
-					return Math.random() * (getSize()[1] - 400);
+					return Math.random() * (getSize()[1] - 600);
 				},
+        rotation: function() {
+          return Math.random() * 360;
+        },
         width: function() {
-          return 50 + (Math.random() * 350);
+          return 50 + (Math.random() * 325);
         },
         opacity: function() {
           return Math.random() * 1;
         },
 				//yoyo: true,
-				ease: Power1.easeIn,
+				ease: Elastic.easeIn,
+          //Power1.easeIn,
 				//repeat: -1,
-				onComplete: function() { $(this).; }
+				onComplete: function() { 
+          howler.play();
+        }
 			})
 		}
-	}, 50);
+	}, 25);
 }
