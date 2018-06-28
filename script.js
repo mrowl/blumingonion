@@ -8,7 +8,8 @@ function getSize() {
 	return [x, y];
 }
 
-var NumImgs = 3;
+var NumImgs = 4;
+var NumBgs = 2;
 
 var tween;
 var imgs = [];
@@ -31,6 +32,8 @@ window.onload = function start() {
     bodyEl.appendChild(img);
   }
 
+	var interval = 25;
+  var tweenCount = 0;
 	window.setInterval(function () {
 		if (!tween || !tween.isActive()) {
 			tween = TweenMax.to(".qr", 3, {
@@ -49,14 +52,15 @@ window.onload = function start() {
         opacity: function() {
           return Math.random() * 1;
         },
-				//yoyo: true,
 				ease: Elastic.easeIn,
-          //Power1.easeIn,
-				//repeat: -1,
 				onComplete: function() { 
           howler.play();
+					tweenCount++;
+					var bgIndex = tweenCount % NumBgs;
+					console.log('elapsed ' + bgIndex);
+					bodyEl.style.background = 'url(bins/' + bgIndex + '.png)';
         }
 			})
 		}
-	}, 25);
+	}, interval);
 }
