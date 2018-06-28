@@ -8,8 +8,8 @@ function getSize() {
 	return [x, y];
 }
 
-var NumImgs = 4;
-var NumBgs = 2;
+var NumImgs = 5;
+var NumBgs = 3;
 
 var tween;
 var imgs = [];
