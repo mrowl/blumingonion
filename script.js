@@ -8,7 +8,7 @@ function getSize() {
 	return [x, y];
 }
 
-var NumImgs = 5;
+var NumImgs = 7;
 var NumBgs = 3;
 
 var tween;
@@ -22,6 +22,7 @@ for (i = 0; i < NumImgs; ++i) {
 }
 
 var bodyEl = document.querySelector('body');
+var gfEl = document.querySelector('#gf');
 var howler = new Howl({
   src: 'bins/airhorn.mp3'
 });
@@ -59,6 +60,20 @@ window.onload = function start() {
 					var bgIndex = tweenCount % NumBgs;
 					console.log('elapsed ' + bgIndex);
 					bodyEl.style.background = 'url(bins/' + bgIndex + '.png)';
+          if (tweenCount > 0 && tweenCount % 2 == 0) {
+            console.log('gf time');
+            var theSize = getSize();
+            gfEl.style.left = Math.random() * theSize[0];
+            gfEl.style.top = Math.random() * theSize[1];
+            gfEl.style.display = 'block';
+            gfEl.style.position = 'absolute';
+            TweenMax.to("#gf", 1.2, {
+              width: 800,
+              height: 1065,
+              yoyo: true,
+              repeat: 1
+            });
+          }
         }
 			})
 		}
