@@ -9,7 +9,7 @@ function getSize() {
 }
 
 var NumImgs = 7;
-var NumBgs = 3;
+var NumBgs = 4;
 
 var tween;
 var imgs = [];
